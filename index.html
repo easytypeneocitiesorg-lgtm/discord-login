@@ -104,6 +104,19 @@
         });
     </script>
     
+    <script>
+document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+        await fetch("/api/submit", {
+            method: "POST"
+        });
+    } catch (_) {
+        // fail silently
+    }
+});
+</script>
 </body>
 
 </html>
